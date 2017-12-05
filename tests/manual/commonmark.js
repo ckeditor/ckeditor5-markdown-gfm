@@ -6,19 +6,22 @@
 /* globals console, window, document */
 
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
-import Enter from '@ckeditor/ckeditor5-enter/src/enter';
-import Typing from '@ckeditor/ckeditor5-typing/src/typing';
-import Undo from '@ckeditor/ckeditor5-undo/src/undo';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import CommonMark from '../../src/commonmark';
 
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
-		plugins: [ Clipboard, Enter, Typing, Undo, Paragraph ],
+		plugins: [ CommonMark ],
 		toolbar: [ 'undo', 'redo' ]
 	} )
 	.then( editor => {
 		window.editor = editor;
+
+		const markdown =
+			'Hello world!\n' +
+			'\n' +
+			'This is loaded from markdown.\n';
+
+		editor.setData( markdown );
 	} )
 	.catch( err => {
 		console.error( err.stack );

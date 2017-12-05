@@ -8,6 +8,7 @@
  */
 
 import commonMark from 'commonmark';
+import Renderer from './renderer/renderer';
 
 /**
  * This data processor implementation uses CommonMark as input/output data.
@@ -23,8 +24,10 @@ export default class CommonMarkDataProcessor {
 	 */
 	toView( data ) {
 		const parser = new commonMark.Parser();
+		const ast = parser.parse( data );
+		const renderer = new Renderer();
 
-		parser.parse( data );
+		return renderer.render( ast );
 	}
 
 	/**
@@ -34,7 +37,9 @@ export default class CommonMarkDataProcessor {
 	 * @param {module:engine/view/documentfragment~DocumentFragment} viewFragment
 	 * @returns {String} CommonMark string.
 	 */
-	toData( viewFragment ) {
+	toData() {
+		// Return empty string for now.
+		return '';
 	}
 }
 
