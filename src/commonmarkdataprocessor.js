@@ -58,6 +58,26 @@ export default class CommonMarkDataProcessor {
 					output += `![${ alt }](${ src })\n\n`;
 				}
 
+				if ( node.is( 'element', 'a' ) ) {
+					let child;
+					let text = '';
+
+					if ( node.childCount ) {
+						child = node.getChild( 0 );
+
+						if ( child.is( 'text' ) ) {
+							text = child.data;
+						}
+					}
+
+					const href = node.getAttribute( 'href' ) || '';
+
+					output += `[${ text }](${ href })`;
+
+					walker.skip( value => value.type !== 'elementEnd' );
+					continue;
+				}
+
 				if ( node.is( 'element', 'strong' ) ) {
 					output += '**';
 				}

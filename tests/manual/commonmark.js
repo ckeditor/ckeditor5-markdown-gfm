@@ -11,7 +11,7 @@ import CommonMark from '../../src/commonmark';
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
 		plugins: [ CommonMark ],
-		toolbar: [ 'undo', 'redo', 'bold', 'italic' ],
+		toolbar: [ 'undo', 'redo', 'bold', 'italic', 'link' ],
 		image: {
 			toolbar: [ 'imageTextAlternative' ]
 		}
@@ -24,7 +24,9 @@ ClassicEditor
 			'\n' +
 			'This is **loaded** from *markdown*.\n' +
 			'\n' +
-			'![image](https://upload.wikimedia.org/wikipedia/en/f/fc/CKEditor_logo.png)';
+			'![image](https://upload.wikimedia.org/wikipedia/en/f/fc/CKEditor_logo.png)\n' +
+			'\n' +
+			'this is [link](http://ckeditor.com)';
 
 		const outputContainer = document.getElementById( 'output' );
 		editor.document.on( 'changesDone', () => {
