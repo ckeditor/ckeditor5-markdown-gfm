@@ -59,23 +59,7 @@ export default class CommonMarkDataProcessor {
 				}
 
 				if ( node.is( 'element', 'a' ) ) {
-					let child;
-					let text = '';
-
-					if ( node.childCount ) {
-						child = node.getChild( 0 );
-
-						if ( child.is( 'text' ) ) {
-							text = child.data;
-						}
-					}
-
-					const href = node.getAttribute( 'href' ) || '';
-
-					output += `[${ text }](${ href })`;
-
-					walker.skip( value => value.type !== 'elementEnd' );
-					continue;
+					output += '[';
 				}
 
 				if ( node.is( 'element', 'strong' ) ) {
@@ -98,6 +82,12 @@ export default class CommonMarkDataProcessor {
 
 				if ( node.is( 'element', 'i' ) ) {
 					output += '*';
+				}
+
+				if ( node.is( 'element', 'a' ) ) {
+					const href = node.getAttribute( 'href' ) || '';
+
+					output += `](${ href })`;
 				}
 			}
 
