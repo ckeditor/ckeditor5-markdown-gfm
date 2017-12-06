@@ -26,6 +26,11 @@ ClassicEditor
 			'\n' +
 			'![image](https://upload.wikimedia.org/wikipedia/en/f/fc/CKEditor_logo.png)';
 
+		const outputContainer = document.getElementById( 'output' );
+		editor.document.on( 'changesDone', () => {
+			outputContainer.innerText = editor.getData();
+		} );
+
 		editor.setData( markdown );
 	} )
 	.catch( err => {
