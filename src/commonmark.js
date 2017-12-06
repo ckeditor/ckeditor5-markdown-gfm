@@ -10,6 +10,9 @@ import Enter from '@ckeditor/ckeditor5-enter/src/enter';
 import Typing from '@ckeditor/ckeditor5-typing/src/typing';
 import Undo from '@ckeditor/ckeditor5-undo/src/undo';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+
 import CommonMarkDataProcessor from './commonmarkdataprocessor';
 
 // Simple plugin which loads the data processor.
@@ -19,6 +22,6 @@ function EnableDataProcessor( editor ) {
 
 export default class CommonMark extends Plugin {
 	static get requires() {
-		return [ Clipboard, Enter, Typing, Undo, Paragraph, EnableDataProcessor ];
+		return [ Clipboard, Enter, Typing, Undo, Paragraph, Bold, Italic, EnableDataProcessor ];
 	}
 }

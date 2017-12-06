@@ -11,7 +11,7 @@ import CommonMark from '../../src/commonmark';
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
 		plugins: [ CommonMark ],
-		toolbar: [ 'undo', 'redo' ]
+		toolbar: [ 'undo', 'redo', 'bold', 'italic' ]
 	} )
 	.then( editor => {
 		window.editor = editor;
@@ -19,7 +19,7 @@ ClassicEditor
 		const markdown =
 			'Hello world!\n' +
 			'\n' +
-			'This is loaded from markdown.\n';
+			'This is **loaded** from _markdown_.\n';
 
 		editor.setData( markdown );
 	} )
