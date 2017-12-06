@@ -41,7 +41,6 @@ export default class CommonMarkDataProcessor {
 	 */
 	toData( documentFragment ) {
 		let output = '';
-		let parent;
 		const walker = new TreeWalker( { boundaries: ViewRange.createIn( documentFragment ) } );
 
 		for ( const entry of walker ) {
@@ -59,8 +58,13 @@ export default class CommonMarkDataProcessor {
 					output += `![${ alt }](${ src })\n\n`;
 				}
 
-				parent = node;
-				continue;
+				if ( node.is( 'element', 'strong' ) ) {
+					output += '**';
+				}
+
+				if ( node.is( 'element', 'i' ) ) {
+					output += '*';
+				}
 			}
 
 			if ( type === 'elementEnd' ) {
@@ -68,21 +72,17 @@ export default class CommonMarkDataProcessor {
 					output += '\n\n';
 				}
 
-				parent = node.parent;
+				if ( node.is( 'element', 'strong' ) ) {
+					output += '**';
+				}
 
-				continue;
+				if ( node.is( 'element', 'i' ) ) {
+					output += '*';
+				}
 			}
 
-			if ( type === 'text' && parent && parent.is( 'element', 'p' ) ) {
+			if ( type === 'text' ) {
 				output += node.data;
-			}
-
-			if ( type === 'text' && parent && parent.is( 'element', 'strong' ) ) {
-				output += '**' + node.data + '**';
-			}
-
-			if ( type === 'text' && parent && parent.is( 'element', 'i' ) ) {
-				output += '*' + node.data + '*';
 			}
 		}
 
