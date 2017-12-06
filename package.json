@@ -12,6 +12,7 @@
     "@ckeditor/ckeditor5-clipboard": "^1.0.0-alpha.2",
     "@ckeditor/ckeditor5-core": "^1.0.0-alpha.2",
     "@ckeditor/ckeditor5-enter": "^1.0.0-alpha.2",
+    "@ckeditor/ckeditor5-image": "^1.0.0-alpha.2",
     "@ckeditor/ckeditor5-paragraph": "^1.0.0-alpha.2",
     "@ckeditor/ckeditor5-typing": "^1.0.0-alpha.2",
     "@ckeditor/ckeditor5-undo": "^1.0.0-alpha.2"

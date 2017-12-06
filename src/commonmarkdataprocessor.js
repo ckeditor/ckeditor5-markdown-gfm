@@ -9,6 +9,8 @@
 
 import commonMark from 'commonmark';
 import Renderer from './renderer/renderer';
+import ViewRange from '@ckeditor/ckeditor5-engine/src/view/range';
+import TreeWalker from '@ckeditor/ckeditor5-engine/src/view/treewalker';
 
 /**
  * This data processor implementation uses CommonMark as input/output data.
@@ -37,9 +39,54 @@ export default class CommonMarkDataProcessor {
 	 * @param {module:engine/view/documentfragment~DocumentFragment} viewFragment
 	 * @returns {String} CommonMark string.
 	 */
-	toData() {
-		// Return empty string for now.
-		return '';
+	toData( documentFragment ) {
+		let output = '';
+		let parent;
+		const walker = new TreeWalker( { boundaries: ViewRange.createIn( documentFragment ) } );
+
+		for ( const entry of walker ) {
+			const node = entry.item;
+			const type = entry.type;
+
+			// console.log( node, type );
+
+			if ( type === 'elementStart' ) {
+				// Check if inside figcaption.
+				if ( node.is( 'element', 'img' ) ) {
+					const src = node.getAttribute( 'src' );
+					const alt = node.getAttribute( 'alt' ) || '';
+
+					output += `![${ alt }](${ src })\n\n`;
+				}
+
+				parent = node;
+				continue;
+			}
+
+			if ( type === 'elementEnd' ) {
+				if ( node.is( 'element', 'p' ) ) {
+					output += '\n\n';
+				}
+
+				parent = node.parent;
+
+				continue;
+			}
+
+			if ( type === 'text' && parent && parent.is( 'element', 'p' ) ) {
+				output += node.data;
+			}
+
+			if ( type === 'text' && parent && parent.is( 'element', 'strong' ) ) {
+				output += '**' + node.data + '**';
+			}
+
+			if ( type === 'text' && parent && parent.is( 'element', 'i' ) ) {
+				output += '*' + node.data + '*';
+			}
+		}
+
+		return output.trim();
 	}
 }
 

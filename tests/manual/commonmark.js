@@ -19,7 +19,9 @@ ClassicEditor
 		const markdown =
 			'Hello world!\n' +
 			'\n' +
-			'This is **loaded** from _markdown_.\n';
+			'This is **loaded** from *markdown*.\n' +
+			'\n' +
+			'![image](https://upload.wikimedia.org/wikipedia/en/f/fc/CKEditor_logo.png)';
 
 		editor.setData( markdown );
 	} )
