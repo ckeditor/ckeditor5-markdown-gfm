@@ -16,6 +16,7 @@ import Image from '@ckeditor/ckeditor5-image/src/image';
 import ImageTextAlternative from '@ckeditor/ckeditor5-image/src/imagetextalternative';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import Link from '@ckeditor/ckeditor5-link/src/link';
+import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 
 import CommonMarkDataProcessor from './commonmarkdataprocessor';
 
@@ -38,6 +39,7 @@ export default class CommonMark extends Plugin {
 			ImageTextAlternative,
 			ImageToolbar,
 			Link,
+			Heading,
 			EnableDataProcessor
 		];
 	}

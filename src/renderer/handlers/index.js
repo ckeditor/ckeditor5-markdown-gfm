@@ -5,6 +5,7 @@ import strong from './strong';
 import emph from './emph';
 import image from './image';
 import link from './link';
+import heading from './heading';
 
 export default {
 	document,
@@ -13,5 +14,6 @@ export default {
 	strong,
 	emph,
 	image,
-	link
+	link,
+	heading
 };

@@ -11,16 +11,27 @@ import CommonMark from '../../src/commonmark';
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
 		plugins: [ CommonMark ],
-		toolbar: [ 'undo', 'redo', 'bold', 'italic', 'link' ],
+		toolbar: [ 'headings', 'undo', 'redo', 'bold', 'italic', 'link' ],
 		image: {
 			toolbar: [ 'imageTextAlternative' ]
+		},
+		heading: {
+			options: [
+				{ modelElement: 'paragraph', title: 'Paragraph' },
+				{ modelElement: 'heading1', viewElement: 'h1', title: 'Heading 1' },
+				{ modelElement: 'heading2', viewElement: 'h2', title: 'Heading 2' },
+				{ modelElement: 'heading3', viewElement: 'h3', title: 'Heading 3' },
+				{ modelElement: 'heading4', viewElement: 'h4', title: 'Heading 4' },
+				{ modelElement: 'heading5', viewElement: 'h5', title: 'Heading 5' },
+				{ modelElement: 'heading6', viewElement: 'h6', title: 'Heading 6' },
+			]
 		}
 	} )
 	.then( editor => {
 		window.editor = editor;
 
 		const markdown =
-			'Hello world!\n' +
+			'# Hello world!\n' +
 			'\n' +
 			'This is **loaded** from *markdown*.\n' +
 			'\n' +

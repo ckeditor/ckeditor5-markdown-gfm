@@ -69,6 +69,14 @@ export default class CommonMarkDataProcessor {
 				if ( node.is( 'element', 'i' ) ) {
 					output += '*';
 				}
+
+				// Headings.
+				if ( /h[1-6]/.test( node.name ) ) {
+					// TODO: use regexp group.
+					const level = parseInt( node.name[ 1 ] );
+
+					output += '#'.repeat( level ) + ' ';
+				}
 			}
 
 			if ( type === 'elementEnd' ) {
@@ -88,6 +96,11 @@ export default class CommonMarkDataProcessor {
 					const href = node.getAttribute( 'href' ) || '';
 
 					output += `](${ href })`;
+				}
+
+				// Headings.
+				if ( /h[1-6]/.test( node.name ) ) {
+					output += '\n\n';
 				}
 			}
 
