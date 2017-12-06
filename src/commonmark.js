@@ -13,6 +13,8 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Image from '@ckeditor/ckeditor5-image/src/image';
+import ImageTextAlternative from '@ckeditor/ckeditor5-image/src/imagetextalternative';
+import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 
 import CommonMarkDataProcessor from './commonmarkdataprocessor';
 
@@ -23,6 +25,6 @@ function EnableDataProcessor( editor ) {
 
 export default class CommonMark extends Plugin {
 	static get requires() {
-		return [ Clipboard, Enter, Typing, Undo, Paragraph, Bold, Italic, Image, EnableDataProcessor ];
+		return [ Clipboard, Enter, Typing, Undo, Paragraph, Bold, Italic, Image, ImageTextAlternative, ImageToolbar, EnableDataProcessor ];
 	}
 }

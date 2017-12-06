@@ -27,7 +27,7 @@ export default class Renderer {
 				continue;
 			} else {
 				if ( isEntering ) {
-					const newNode = handler( node );
+					const newNode = handler( node, event, walker );
 
 					if ( currentParent ) {
 						currentParent.appendChildren( newNode );

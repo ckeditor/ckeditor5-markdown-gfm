@@ -11,7 +11,10 @@ import CommonMark from '../../src/commonmark';
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
 		plugins: [ CommonMark ],
-		toolbar: [ 'undo', 'redo', 'bold', 'italic' ]
+		toolbar: [ 'undo', 'redo', 'bold', 'italic' ],
+		image: {
+			toolbar: [ 'imageTextAlternative' ]
+		}
 	} )
 	.then( editor => {
 		window.editor = editor;
