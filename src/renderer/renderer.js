@@ -4,39 +4,46 @@
  */
 
 import ViewDocumentFragment from '@ckeditor/ckeditor5-engine/src/view/documentfragment';
-import ViewElement from '@ckeditor/ckeditor5-engine/src/view/element';
-import ViewText from '@ckeditor/ckeditor5-engine/src/view/text';
+import handlers from './handlers';
 
 export default class Renderer {
 	render( ast ) {
-		const viewDocumentFragment = new ViewDocumentFragment();
 		const walker = ast.walker();
 		let event;
-		let currentParent = viewDocumentFragment;
+		let currentParent = null;
 
 		while ( ( event = walker.next() ) ) {
 			const node = event.node;
 			const type = node.type;
-			const entering = event.entering;
+			const isEntering = event.entering;
+			const handler = handlers[ type ];
 
-			if ( type == 'paragraph' ) {
-				if ( entering ) {
-					const paragraph = new ViewElement( 'p' );
-
-					currentParent.appendChildren( paragraph );
-					currentParent = paragraph;
-				} else {
-					currentParent = currentParent.parent;
+			// Skip nodes which we do not handle.
+			if ( !handler ) {
+				if ( isEntering ) {
+					walker.resumeAt( node, false );
 				}
-			}
 
-			if ( type == 'text' ) {
-				if ( entering ) {
-					currentParent.appendChildren( new ViewText( node.literal ) );
+				continue;
+			} else {
+				if ( isEntering ) {
+					const newNode = handler( node );
+
+					if ( currentParent ) {
+						currentParent.appendChildren( newNode );
+					}
+
+					if ( node.isContainer ) {
+						currentParent = newNode;
+					}
+				} else {
+					if ( currentParent.parent ) {
+						currentParent = currentParent.parent;
+					}
 				}
 			}
 		}
 
-		return viewDocumentFragment;
+		return currentParent || new ViewDocumentFragment();
 	}
 }
