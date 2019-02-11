@@ -50,14 +50,7 @@ function Markdown( editor ) {
 
 ClassicEditor
 	.create( document.querySelector( '#snippet-markdown' ), {
-		plugins: [
-			Markdown,
-
-			Essentials,
-			Bold,
-			Italic,
-			// ...
-		],
+		extraPlugins: [ Markdown ],
 		// ...
 	} )
 	.then( ... )
