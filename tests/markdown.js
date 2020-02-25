@@ -19,6 +19,8 @@ describe( 'Markdown', () => {
 			} )
 			.then( editor => {
 				expect( editor.data.processor ).to.be.an.instanceof( GFMDataProcessor );
+
+				editor.destroy(); // Tests cleanup.
 			} );
 	} );
 } );
