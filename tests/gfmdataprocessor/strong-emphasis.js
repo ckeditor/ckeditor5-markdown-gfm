@@ -86,7 +86,7 @@ describe( 'GFMDataProcessor', () => {
 		} );
 
 		it( 'should not render escape marks', () => {
-			test(
+			testDataProcessor(
 				// Following the previous test.
 				'This should\\_not\\_be\\_emp.',
 

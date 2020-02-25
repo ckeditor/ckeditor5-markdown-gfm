@@ -345,7 +345,7 @@ describe( 'GFMDataProcessor', () => {
 
 	describe( 'todo lists', () => {
 		it( 'should process todo lists', () => {
-			test(
+			testDataProcessor(
 				'*   [ ] Item 1\n' +
 				'*   [x] Item 2',
 
