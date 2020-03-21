@@ -5,7 +5,7 @@
 
 import MarkdownDataProcessor from '../../src/gfmdataprocessor';
 import { stringify } from '@ckeditor/ckeditor5-engine/src/dev-utils/view';
-import { testDataProcessor as test } from '../../tests/_utils/utils';
+import { testDataProcessor } from '../../tests/_utils/utils';
 import ViewDocument from '@ckeditor/ckeditor5-engine/src/view/document';
 import { StylesProcessor } from '@ckeditor/ckeditor5-engine/src/view/stylesmap';
 
@@ -78,19 +78,19 @@ describe( 'GFMDataProcessor', () => {
 			// back to entities when outputting markdown.
 
 			it( 'should escape <', () => {
-				test( '\\<', '<p><</p>' );
+				testDataProcessor( '\\<', '<p><</p>' );
 			} );
 
 			it( 'should escape HTML as text', () => {
-				test( '\\<h1>Test\\</h1>', '<p><h1>Test</h1></p>' );
+				testDataProcessor( '\\<h1>Test\\</h1>', '<p><h1>Test</h1></p>' );
 			} );
 
 			it( 'should not escape \\< inside inline code', () => {
-				test( '`\\<`', '<p><code>\\<</code></p>' );
+				testDataProcessor( '`\\<`', '<p><code>\\<</code></p>' );
 			} );
 
 			it( 'should not touch escape-like HTML inside code blocks', () => {
-				test(
+				testDataProcessor(
 					'```\n' +
 					'\\<h1>Test\\</h1>\n' +
 					'```',
@@ -101,7 +101,7 @@ describe( 'GFMDataProcessor', () => {
 
 			// Necessary test as we're overriding Turndown's escape(). Just to be sure.
 			it( 'should still escape markdown characters', () => {
-				test( '\\* \\_', '<p>* _</p>' );
+				testDataProcessor( '\\* \\_', '<p>* _</p>' );
 			} );
 		} );
 	} );
