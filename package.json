@@ -10,7 +10,11 @@
     "ckeditor5-plugin"
   ],
   "dependencies": {
-    "@ckeditor/ckeditor5-engine": "^19.0.0"
+    "@ckeditor/ckeditor5-core": "^19.0.0",
+    "@ckeditor/ckeditor5-engine": "^19.0.0",
+    "marked": "^0.7.0",
+    "turndown": "^6.0.0",
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "devDependencies": {
     "eslint": "^5.5.0",
